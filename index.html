@@ -1,0 +1,285 @@
+<!DOCTYPE html>
+<html lang="fa" dir="rtl">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>آزمون سخت هشتم | بردیا عزیزی</title>
+
+<style>
+body {
+    font-family: Tahoma, sans-serif;
+    background: linear-gradient(135deg, #101828, #263b5a);
+    color: white;
+    text-align: center;
+    padding: 20px;
+    margin: 0;
+}
+
+.container {
+    max-width: 750px;
+    margin: 25px auto;
+    background: #ffffff;
+    color: #172033;
+    padding: 25px;
+    border-radius: 20px;
+    box-shadow: 0 10px 35px #0005;
+}
+
+h1 { color: #0c7c59; }
+.creator {
+    background: #102b46;
+    color: #ffd166;
+    padding: 12px;
+    border-radius: 10px;
+    font-weight: bold;
+}
+
+select, button {
+    padding: 12px;
+    margin: 8px;
+    border-radius: 8px;
+    border: 1px solid #ccc;
+    font-size: 15px;
+}
+
+button {
+    background: #087f5b;
+    color: white;
+    cursor: pointer;
+    border: none;
+}
+
+button:hover { background: #065f46; }
+
+.question {
+    text-align: right;
+    background: #f1f5f9;
+    padding: 16px;
+    border-radius: 12px;
+    margin: 15px 0;
+}
+
+label {
+    display: block;
+    padding: 9px;
+    cursor: pointer;
+}
+
+#result {
+    font-size: 20px;
+    font-weight: bold;
+    margin-top: 20px;
+}
+</style>
+</head>
+
+<body>
+
+<div class="container">
+    <h1>🏆 آزمون فوق‌سخت پایه هشتم</h1>
+
+    <div class="creator">
+        سازنده و طراح: بردیا عزیزی
+    </div>
+
+    <p>آزمون چهارگزینه‌ای سطح پیشرفته</p>
+
+    <select id="subject">
+        <option value="math">ریاضی</option>
+        <option value="science">علوم</option>
+        <option value="general">آزمون ترکیبی</option>
+    </select>
+
+    <button onclick="startQuiz()">شروع آزمون</button>
+
+    <div id="quiz"></div>
+    <div id="result"></div>
+</div>
+
+<script>
+const questions = {
+math: [
+{
+q: "اگر 3(2x - 5) = 4x + 7 باشد، مقدار x کدام است؟",
+a: ["8", "11", "10", "7"],
+c: 1
+},
+{
+q: "مجموع دو زاویه مکمل 180 درجه است. اگر یکی سه برابر دیگری منهای 20 درجه باشد، زاویه کوچک‌تر چند درجه است؟",
+a: ["40", "50", "45", "60"],
+c: 1
+},
+{
+q: "حاصل عبارت 2³ × 2⁴ ÷ 2² چیست؟",
+a: ["16", "32", "64", "128"],
+c: 2
+},
+{
+q: "اگر محیط مربعی 48 سانتی‌متر باشد، مساحت آن چند سانتی‌متر مربع است؟",
+a: ["96", "144", "121", "196"],
+c: 1
+},
+{
+q: "الگوی 2، 6، 12، 20، 30، ... عدد بعدی چیست؟",
+a: ["36", "40", "42", "44"],
+c: 2
+},
+{
+q: "اگر 5x - 3 = 2x + 18 باشد، مقدار 2x + 1 چیست؟",
+a: ["13", "15", "17", "19"],
+c: 2
+},
+{
+q: "احتمال آمدن عدد زوج در پرتاب یک تاس سالم چقدر است؟",
+a: ["1/3", "1/2", "2/3", "1/6"],
+c: 1
+},
+{
+q: "اگر نسبت دو عدد 3 به 5 و مجموع آن‌ها 64 باشد، عدد بزرگ‌تر کدام است؟",
+a: ["24", "32", "40", "48"],
+c: 2
+}
+],
+
+science: [
+{
+q: "کدام گزینه درباره تغییر شیمیایی درست است؟",
+a: [
+"تغییر شکل کاغذ",
+"ذوب شدن یخ",
+"زنگ زدن آهن",
+"خرد شدن شیشه"
+],
+c: 2
+},
+{
+q: "کدام ذره در هسته اتم بار مثبت دارد؟",
+a: ["الکترون", "پروتون", "نوترون", "مولکول"],
+c: 1
+},
+{
+q: "وظیفه اصلی گلبول‌های قرمز چیست؟",
+a: [
+"مبارزه با میکروب‌ها",
+"انعقاد خون",
+"انتقال اکسیژن",
+"ساخت هورمون"
+],
+c: 2
+},
+{
+q: "در مدار الکتریکی سری، اگر یکی از لامپ‌ها قطع شود، چه اتفاقی می‌افتد؟",
+a: [
+"بقیه پرنورتر می‌شوند",
+"همه لامپ‌ها خاموش می‌شوند",
+"جریان افزایش می‌یابد",
+"هیچ تغییری رخ نمی‌دهد"
+],
+c: 1
+},
+{
+q: "کدام مورد نمونه‌ای از انرژی شیمیایی ذخیره‌شده است؟",
+a: ["باتری", "صدای بلندگو", "نور چراغ", "حرکت چرخ"],
+c: 0
+},
+{
+q: "کدام اندام در تصفیه خون و تولید ادرار نقش اصلی دارد؟",
+a: ["معده", "ریه", "کلیه", "لوزالمعده"],
+c: 2
+},
+{
+q: "کدام گزینه یک مخلوط همگن است؟",
+a: ["آب و روغن", "آب‌نمک یکنواخت", "شن و آب", "سالاد"],
+c: 1
+},
+{
+q: "کدام عامل معمولاً سرعت حل شدن شکر در آب را افزایش می‌دهد؟",
+a: [
+"کاهش دما",
+"درشت‌تر کردن بلورها",
+"هم زدن محلول",
+"کاهش تماس با آب"
+],
+c: 2
+}
+],
+
+general: []
+};
+
+questions.general = [
+...questions.math.slice(0, 4),
+...questions.science.slice(0, 4)
+];
+
+let currentQuestions = [];
+let answers = [];
+
+function startQuiz() {
+    const subject = document.getElementById("subject").value;
+
+    currentQuestions = questions[subject];
+    answers = new Array(currentQuestions.length).fill(-1);
+
+    document.getElementById("result").innerHTML = "";
+
+    let html = "";currentQuestions.forEach((item, index) => {
+        html += 
+        <div class="question">
+            <h3>سؤال ${index + 1}: ${item.q}</h3>
+            ${item.a.map((option, i) => 
+                <label>
+                    <input type="radio" name="q${index}" value="${i}">
+                    ${option}
+                </label>
+            ).join("")}
+        </div>;
+    });
+
+    html += <button onclick="checkAnswers()">ثبت پاسخ‌ها و مشاهده نتیجه</button>;
+
+    document.getElementById("quiz").innerHTML = html;
+}
+
+function checkAnswers() {
+    let score = 0;
+    let details = "";
+
+    currentQuestions.forEach((item, index) => {
+        const selected = document.querySelector(
+            input[name="q${index}"]:checked
+        );
+
+        const answer = selected ? Number(selected.value) : -1;
+
+        if (answer === item.c) {
+            score++;
+            details += <p>سؤال ${index + 1}: ✅ درست</p>;
+        } else {
+            details += 
+            <p>
+                سؤال ${index + 1}: ❌ نادرست یا بدون پاسخ
+                <br>
+                پاسخ صحیح: ${item.a[item.c]}
+            </p>;
+        }
+    });
+
+    const percent = Math.round(
+        score / currentQuestions.length * 100
+    );
+
+    document.getElementById("result").innerHTML = 
+        <h2>نتیجه آزمون</h2>
+        <p>نام طراح: بردیا عزیزی</p>
+        <p>نمره: ${score} از ${currentQuestions.length}</p>
+        <p>درصد پاسخ صحیح: ${percent}٪</p>
+        <hr>
+        ${details}
+        <button onclick="startQuiz()">آزمون مجدد</button>
+    ;
+}
+</script>
+
+</body>
+</html>
